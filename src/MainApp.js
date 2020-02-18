@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
@@ -8,6 +11,8 @@ import Nav from 'react-bootstrap/Nav'
 import Navigation from './Navigation'
 import PreparationComponent from './PreparationComponent'
 import LiveComponent from './LiveComponent'
+import ShowTournaments from './ShowTournaments'
+import fetchTournaments from './actions'
 
 
 import './App.css';
@@ -32,7 +37,10 @@ class MainApp extends React.Component {
     })
   }
 
-  onTournamentsClicked(){
+  onTournamentsClicked(event){
+    event.preventDefault()
+    console.log("Fetch tournaments")
+    this.props.dispatch(fetchTournaments())
     this.setState({
       status: "ShowTournaments"
     })
@@ -57,6 +65,8 @@ class MainApp extends React.Component {
       centralComponent = <PreparationComponent onPreparationFinished={this.onPreparationFinished} />
     else if  (this.state.status === "Live")
       centralComponent = <LiveComponent/>
+    else if  (this.state.status === "ShowTournaments")
+      centralComponent = <ShowTournaments tournaments={this.props.tournaments}/>
 
     return (
       <Container className="App">
@@ -89,4 +99,18 @@ class MainApp extends React.Component {
   }
 }
 
-export default MainApp;
+MainApp.propTypes = {
+  tournaments: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
+}
+
+function mapStateToProps(state) {
+  const { tournaments } = state
+  return {
+    tournaments
+  }
+}
+
+
+
+export default connect(mapStateToProps)(MainApp)
