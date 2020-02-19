@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './components/index.css';
-import MainApp from './components/MainApp';
+import MainAppContainer from './components/MainAppContainer';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
@@ -23,7 +23,7 @@ const store = createStore(rootReducer,
 
 ReactDOM.render(
   <Provider store={store}>
-    <MainApp />
+    <MainAppContainer />
   </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
