@@ -12,7 +12,7 @@ import Navigation from './Navigation'
 import PreparationComponent from './PreparationComponent'
 import LiveComponent from './LiveComponent'
 import ShowTournaments from './ShowTournaments'
-import fetchTournaments from './actions'
+import fetchTournaments from '../actions'
 
 
 import './App.css';
