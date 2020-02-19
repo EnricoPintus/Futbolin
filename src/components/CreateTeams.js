@@ -10,15 +10,10 @@ class CreateTeams extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state  = {
-            buttonText: "Add",
-            placeholderText: "Name"
-        }
     }
 
     handleSubmit = (event) => {
       event.preventDefault()
-      this.props.onPlayerAdded(event.target.playername.value)
     }
 
     render() {

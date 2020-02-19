@@ -14,19 +14,6 @@ class PreparationComponent extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state =
-      {
-        players: ["Enrico", "Pintus", "New"]
-      };
-    this.onPlayerAdded = this.onPlayerAdded.bind(this)
-  }
-
-  onPlayerAdded(player){
-    const currentPlayersList = this.state.players
-    currentPlayersList.push(player)
-    this.setState({
-      players: currentPlayersList
-    })
   }
 
   handleGenerate = (event) => {
@@ -39,7 +26,7 @@ class PreparationComponent extends React.Component {
     return (
       <Container>
         <Row>
-          <Col> <CreateTeams onPlayerAdded={this.onPlayerAdded}/>  </Col>
+          <Col> <CreateTeams/>  </Col>
         </Row>
         <Row>
           <Button onClick={this.handleGenerate}> Generate teams and matches </Button>
