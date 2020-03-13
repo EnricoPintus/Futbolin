@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 
 import NavigationContainer from './NavigationContainer'
 import ShowTournamentsContainer from './ShowTournamentsContainer';
+import PlayersTableContainer from './PlayersTableContainer'
 import PreparationComponent from './PreparationComponent'
 import LiveComponent from './LiveComponent'
 
@@ -26,6 +27,8 @@ class MainApp extends React.Component {
       centralComponent = <LiveComponent/>
     else if  (this.props.view === "Tournaments")
       centralComponent = <ShowTournamentsContainer/>
+    else if  (this.props.view === "Players")
+      centralComponent = <PlayersTableContainer/>
 
     return (
       <Container className="App">
