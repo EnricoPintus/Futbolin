@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ShowTournaments from './ShowTournaments'
-import {fetchTournaments } from '../actions'
+import {fetchTournaments } from '../actions/TournamentsActions'
 
 import './App.css';
 
