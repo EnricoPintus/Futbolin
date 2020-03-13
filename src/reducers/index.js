@@ -5,9 +5,8 @@ const activeView = (state = 'Live', action) => {
   switch (action.type) {
     case 'TOGGLE_VIEW':
       return action.view
-      break;
     default:
-      return 'Live'
+      return state
   }
 }
 
