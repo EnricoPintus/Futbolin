@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   handleClose: () => dispatch(showEditPlayerDialog(false)),
-  insertPlayer: (player) => dispatch(insertPlayer(player))
+  insertPlayer: player => dispatch(insertPlayer(player))
 })
 
 export default connect(

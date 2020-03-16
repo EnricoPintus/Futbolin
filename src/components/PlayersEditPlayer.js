@@ -11,6 +11,17 @@ class PlayersEditPlayer extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+          playerName: '',
+          playerSurname: '',
+        };
+    }
+
+    myChangeHandler = (event) => {
+      let nam = event.target.name;
+      let val = event.target.value;
+      this.setState({[nam]: val});
     }
 
     render() {
@@ -23,11 +34,11 @@ class PlayersEditPlayer extends React.Component {
             <Form>
               <Form.Group>
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Name" />
+                <Form.Control type="text" placeholder="Name" name="playerName" onChange={this.myChangeHandler}/>
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Surname</Form.Label>
-                <Form.Control type="tet" placeholder="Surname" />
+                <Form.Control type="text" placeholder="Surname" name="playerSurname" onChange={this.myChangeHandler}/>
               </Form.Group>
             </Form>
           </Modal.Body>
@@ -35,9 +46,9 @@ class PlayersEditPlayer extends React.Component {
             <Button variant="secondary" onClick={this.props.handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.props.insertPlayer({
-                                              name: 'Internal',
-                                              surname: 'Property'
+            <Button variant="primary" onClick={() => this.props.insertPlayer({
+                                              name: this.state.playerName,
+                                              surname: this.state.playerSurname
                                               })}>
               Save Changes
             </Button>
