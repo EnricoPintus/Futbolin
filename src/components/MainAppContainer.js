@@ -1,7 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux'
 import MainApp from './MainApp'
-import { toggleView } from '../actions'
+import { toggleView } from '../actions/ViewActions'
 
 import './App.css';
 

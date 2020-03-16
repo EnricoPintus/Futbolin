@@ -9,7 +9,7 @@ export function requestPlayers(filter) {
 }
 export const RECEIVE_PLAYERS = 'RECEIVE_PLAYERS'
 
-function receivePlayers(json) {
+export function receivePlayers(json) {
   let players = json
   return {
     type: RECEIVE_PLAYERS,
@@ -25,3 +25,28 @@ export function fetchPlayers() {
   }
 }
 
+export const SHOW_EDIT_PLAYER_DIALOG = 'SHOW_EDIT_PLAYER_DIALOG'
+export function showEditPlayerDialog(show, mode) {
+  return {
+    type: SHOW_EDIT_PLAYER_DIALOG,
+    show,
+    mode
+  }
+}
+
+export function insertPlayer(player) {
+  return dispatch => {
+    return fetch(`players`, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: player.name,
+          surname: player.surname
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+			  }
+		  })
+      .then(response => response.json())
+      .then(dispatch(fetchPlayers()))
+  }
+}

@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { RECEIVE_PLAYERS } from '../actions/PlayersActions'
+import { RECEIVE_PLAYERS, SHOW_EDIT_PLAYER_DIALOG } from '../actions/PlayersActions'
 
 
 const activeView = (state = 'Live', action) => {
@@ -29,10 +29,23 @@ const players = (state = [], action) => {
   }
 }
 
+const editPlayersView = (state = {show: false}, action) => {
+  switch (action.type) {
+    case SHOW_EDIT_PLAYER_DIALOG:
+      return {
+        show: action.show,
+        mode: action.mode
+      }
+    default:
+      return state
+  }
+}
+
 const rootReducer =  combineReducers ({
     activeView,
     tournaments,
-    players
+    players,
+    editPlayersView
 })
 
 export default rootReducer;

@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import PlayersEditPlayerContainer from './PlayersEditPlayerContainer';
 import PropTypes from 'prop-types'
 
 
@@ -30,7 +29,8 @@ class PlayersTable extends React.Component {
       )
       return (
         <div>
-          <Button variant="light"> Create new player </Button>
+          <PlayersEditPlayerContainer/>
+          <Button variant="light" onClick={this.props.createPlayer}> Create new player </Button>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -50,6 +50,7 @@ class PlayersTable extends React.Component {
 
 PlayersTable.propTypes = {
   requestPlayers: PropTypes.func.isRequired,
+  createPlayer: PropTypes.func.isRequired,
   players: PropTypes.array.isRequired
 }
 
