@@ -1,5 +1,6 @@
 import React from 'react';
-import Toast from 'react-bootstrap/Toast'
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 import PropTypes from 'prop-types'
 
 import './App.css';
@@ -17,18 +18,34 @@ class ShowTournaments extends React.Component {
 
 
   render() {
-    let tournamentsToastsList = this.props.tournaments.map((tournament) =>
-      <Toast>
-        <Toast.Header>
-          <strong>{tournament.id}</strong>
-        </Toast.Header>
-        <Toast.Body>{tournament.name}</Toast.Body>
-      </Toast>
+
+    let tournamentsRows = this.props.tournaments.map((tournament) =>
+      <tr>
+        <td>
+          <input type="checkbox"/>
+        </td>
+        <td>{tournament.name}</td>
+        <td>{tournament.date}</td>
+        <td>{tournament.finished ? "View" : "Play"}</td>
+      </tr>
     )
-    return (
-      <div>
-        {tournamentsToastsList}
-      </div>
+  return (
+    <div>
+      <Button variant="light" > Create new tournament </Button>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tournamentsRows}
+        </tbody>
+      </Table>
+    </div>
     );
   }
 }
