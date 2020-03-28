@@ -22,7 +22,7 @@ class Navigation extends React.Component {
                 Players
         </Button>
         <Button className="NavigationButton" variant="outline-dark"
-                onClick={() => this.props.toggleView("Preparation")}>
+                onClick={() => this.props.toggleView("Live")}>
                 Live
         </Button>
       </Nav>

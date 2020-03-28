@@ -7,8 +7,8 @@ export function requestTournaments(filter) {
     filter
   }
 }
-export const RECEIVE_TOURNAMENTS = 'RECEIVE_TOURNAMENTS'
 
+export const RECEIVE_TOURNAMENTS = 'RECEIVE_TOURNAMENTS'
 function receiveTournaments(filter, json) {
   let tournaments = json
   return {
@@ -18,10 +18,6 @@ function receiveTournaments(filter, json) {
     receivedAt: Date.now()
   }
 }
-
-// Meet our first thunk action creator!
-// Though its insides are different, you would use it just like any other action creator:
-// store.dispatch(fetchPosts('reactjs'))
 export function fetchTournaments(filter) {
   return dispatch => {
     return fetch(`tournaments`)
@@ -30,3 +26,11 @@ export function fetchTournaments(filter) {
   }
 }
 
+export const SHOW_PLAY_TOURNAMENT = 'SHOW_PLAY_TOURNAMENT'
+export function showPlayTournament(tournament)
+{
+  return {
+    type: SHOW_PLAY_TOURNAMENT,
+    tournament
+  }
+}

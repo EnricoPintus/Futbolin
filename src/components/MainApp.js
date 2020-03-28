@@ -7,8 +7,7 @@ import Col from 'react-bootstrap/Col'
 import NavigationContainer from './NavigationContainer'
 import ShowTournamentsContainer from './ShowTournamentsContainer';
 import PlayersTableContainer from './PlayersTableContainer'
-import PreparationComponent from './PreparationComponent'
-import LiveComponent from './LiveComponent'
+import LiveContainer from './LiveContainer';
 
 
 import './App.css';
@@ -21,10 +20,8 @@ class MainApp extends React.Component {
 
   render() {
     let centralComponent;
-    if (this.props.view === "Preparation")
-      centralComponent = <PreparationComponent/>
-    else if  (this.props.view === "Live")
-      centralComponent = <LiveComponent/>
+    if  (this.props.view === "Live")
+      centralComponent = <LiveContainer/>
     else if  (this.props.view === "Tournaments")
       centralComponent = <ShowTournamentsContainer/>
     else if  (this.props.view === "Players")
