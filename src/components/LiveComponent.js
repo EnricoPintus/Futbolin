@@ -1,5 +1,6 @@
 import React from 'react';
 import ShowTournamentsContainer from './ShowTournamentsContainer'
+import PreparationContainer from './PreparationContainer'
 import PropTypes from 'prop-types'
 
 
@@ -15,8 +16,15 @@ class LiveComponent extends React.Component {
 
   render() {
     let mainComponent
-    if (this.props.liveView.tournament === "empty")
+    const liveTournament = this.props.liveView.tournament;
+    if ( liveTournament === "empty")
       mainComponent = <ShowTournamentsContainer/>
+    else {
+      if (liveTournament.status == "2") //Preparation
+      {
+        mainComponent = <PreparationContainer/>
+      }
+    }
     return (
       <div>{mainComponent}</div>
 
@@ -26,13 +34,10 @@ class LiveComponent extends React.Component {
 
 
 LiveComponent.propTypes = {
-  tournaments: PropTypes.array.isRequired,
-  mode: PropTypes.string.isRequired,
   liveView: PropTypes.object.isRequired
 }
 
 export default LiveComponent;
-
 
 /* <Container>
 <Row>

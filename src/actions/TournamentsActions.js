@@ -34,3 +34,21 @@ export function showPlayTournament(tournament)
     tournament
   }
 }
+
+export const RECEIVE_TEAMS_GENERATED = 'RECEIVE_TEAMS_GENERATED'
+function receiveTeamsGenerated(json) {
+  let teamsGenerated = json
+  return {
+    type: RECEIVE_TEAMS_GENERATED,
+    tournament: teamsGenerated.tournament,
+    teams: teamsGenerated.teams
+  }
+}
+
+export function generateTeams(tournament) {
+  return dispatch => {
+    return fetch('tournaments/' + tournament + "/generateTeams")
+    .then(response => response.json())
+    .then(json => dispatch(receiveTeamsGenerated(json)))
+  }
+}
