@@ -30,12 +30,17 @@ const players = (state = [], action) => {
   }
 }
 
-const editPlayersView = (state = {show: false}, action) => {
+const playersView = (state = {show: false, activeView: ""}, action) => {
   switch (action.type) {
     case SHOW_EDIT_PLAYER_DIALOG:
       return {
-        show: action.show,
-        mode: action.mode
+        ...state,
+        show: action.show
+      }
+    case SHOW_PLAY_TOURNAMENT:
+      return {
+        ...state,
+        activeView: "Preparation"
       }
     default:
       return state
@@ -57,7 +62,7 @@ const rootReducer =  combineReducers ({
     activeView,
     tournaments,
     players,
-    editPlayersView,
+    playersView,
     liveView
 })
 

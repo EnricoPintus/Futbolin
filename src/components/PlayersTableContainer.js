@@ -4,8 +4,11 @@ import PlayersTable from './PlayersTable'
 
 import './App.css';
 
+
+
 const mapStateToProps = (state) => ({
-  players: state.players
+  players: state.players,
+  playersView: state.playersView
 })
 
 const mapDispatchToProps = dispatch => ({
