@@ -58,12 +58,17 @@ const liveView = (state = {tournament: "empty"}, action) => {
   }
 }
 
+const uiItems = combineReducers ({
+  activeView,
+  playersView,
+  liveView
+})
+
+
 const rootReducer =  combineReducers ({
-    activeView,
-    tournaments,
     players,
-    playersView,
-    liveView
+    tournaments,
+    uiItems
 })
 
 export default rootReducer;

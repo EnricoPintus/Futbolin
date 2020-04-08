@@ -5,7 +5,7 @@ import { toggleView } from '../actions/ViewActions'
 import './App.css';
 
 const mapStateToProps = (state) => ({
-  view: state.activeView,
+  view: state.uiItems.activeView,
   tournaments: state.tournaments
 })
 

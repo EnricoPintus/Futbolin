@@ -5,7 +5,7 @@ import PreparationComponent from './PreparationComponent'
 import './App.css';
 
 const mapStateToProps = (state) => ({
-  tournament: state.liveView.tournament
+  tournament: state.uiItems.liveView.tournament
 })
 
 const mapDispatchToProps = dispatch => ({

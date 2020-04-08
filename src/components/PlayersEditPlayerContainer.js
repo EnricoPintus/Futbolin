@@ -4,8 +4,8 @@ import {showEditPlayerDialog, insertPlayer} from '../actions/PlayersActions'
 
 
 const mapStateToProps = (state) => ({
-  show: state.playersView.show,
-  mode: state.playersView.mode
+  show: state.uiItems.playersView.show,
+  mode: state.uiItems.playersView.mode
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -8,7 +8,7 @@ import './App.css';
 
 const mapStateToProps = (state) => ({
   players: state.players,
-  playersView: state.playersView
+  playersView: state.uiItems.playersView
 })
 
 const mapDispatchToProps = dispatch => ({

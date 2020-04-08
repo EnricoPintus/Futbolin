@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
   tournaments: state.tournaments.filter (function(tournament) {
     return tournament.status != 1
   }),
-  liveView: state.liveView
+  liveView: state.uiItems.liveView
 })
 
 const mapDispatchToProps = dispatch => ({
