@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { fetchPlayers, showEditPlayerDialog } from '../actions/PlayersActions'
 import LiveComponent from './LiveComponent';
 
 import './App.css';

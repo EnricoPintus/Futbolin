@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Dropdown from 'react-bootstrap/Dropdown'
 import PlayersEditPlayerContainer from './PlayersEditPlayerContainer';
+import {PLAYERS_TABLE_MODE_CREATE, PLAYERS_TABLE_MODE_TEAMS, PLAYERS_TABLE_MODE_SELECT} from '../reducers/index'
 import PropTypes from 'prop-types'
 
 
@@ -12,6 +13,11 @@ class PlayersTable extends React.Component {
 
     constructor(props) {
         super(props);
+        this.handleCheckbox = this.handleCheckbox.bind(this);
+    }
+
+    handleCheckbox(playerId, event) {
+      this.props.selectPlayerForParticipation(playerId, event.target.checked)
     }
 
     componentDidMount() {
@@ -19,6 +25,7 @@ class PlayersTable extends React.Component {
     }
 
     render() {
+      const showAddPlayersButton = this.props.playersView.mode === PLAYERS_TABLE_MODE_CREATE
       const teamsDropdown =
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -34,23 +41,25 @@ class PlayersTable extends React.Component {
 
       let playersRows = this.props.players.map((player) =>
         <tr>
-          <td><input type="checkbox"/> </td>
+          {this.props.playersView.mode === PLAYERS_TABLE_MODE_SELECT &&
+            <td><input type="checkbox" onClick={(event) => this.handleCheckbox(player.id,event)}/>
+          </td>}
           <td>{player.name}</td>
           <td>{player.surname}</td>
-          {this.props.playersView.activeView === "Preparation" && <td>{teamsDropdown}</td>}
+          {this.props.playersView.mode === PLAYERS_TABLE_MODE_TEAMS && <td>{teamsDropdown}</td>}
         </tr>
       )
       return (
         <div>
           <PlayersEditPlayerContainer/>
-          <Button variant="light" onClick={this.props.createPlayer}> Create new player </Button>
+          {showAddPlayersButton && <Button variant="light" onClick={this.props.createPlayer}> Create new player </Button>}
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
+                {this.props.playersView.mode === PLAYERS_TABLE_MODE_SELECT && <th>#</th> }
                 <th>First Name</th>
                 <th>Last Name</th>
-                {this.props.playersView.activeView === "Preparation" && <th>Team</th>}
+                {this.props.playersView.mode === PLAYERS_TABLE_MODE_TEAMS && <th>Team</th>}
               </tr>
             </thead>
             <tbody>
@@ -65,6 +74,7 @@ class PlayersTable extends React.Component {
 PlayersTable.propTypes = {
   requestPlayers: PropTypes.func.isRequired,
   createPlayer: PropTypes.func.isRequired,
+  selectPlayerForParticipation: PropTypes.func.isRequired,
   players: PropTypes.array.isRequired,
   playersView: PropTypes.object.isRequired
 }

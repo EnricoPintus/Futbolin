@@ -26,10 +26,10 @@ export function fetchPlayers() {
 }
 
 export const SHOW_EDIT_PLAYER_DIALOG = 'SHOW_EDIT_PLAYER_DIALOG'
-export function showEditPlayerDialog(show, mode) {
+export function showEditPlayerDialog(showEditDialog, mode) {
   return {
     type: SHOW_EDIT_PLAYER_DIALOG,
-    show,
+    showEditDialog,
     mode
   }
 }
@@ -48,5 +48,14 @@ export function insertPlayer(player) {
 		  })
       .then(response => response.json())
       .then(dispatch(fetchPlayers()))
+  }
+}
+
+export const SELECT_PLAYER_FOR_PARTICIPATION = 'SELECT_PLAYER_FOR_PARTICIPATION'
+export function selectPlayerForParticipation(playerId, select) {
+  return {
+    type: SELECT_PLAYER_FOR_PARTICIPATION,
+    playerId,
+    select
   }
 }

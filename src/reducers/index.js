@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { RECEIVE_PLAYERS, SHOW_EDIT_PLAYER_DIALOG } from '../actions/PlayersActions'
+import { RECEIVE_PLAYERS, SHOW_EDIT_PLAYER_DIALOG, SELECT_PLAYER_FOR_PARTICIPATION } from '../actions/PlayersActions'
 import { SHOW_PLAY_TOURNAMENT } from '../actions/TournamentsActions'
 
 
@@ -30,17 +30,27 @@ const players = (state = [], action) => {
   }
 }
 
-const playersView = (state = {show: false, activeView: ""}, action) => {
+export const PLAYERS_TABLE_MODE_CREATE = "CREATE"
+export const PLAYERS_TABLE_MODE_SELECT = "SELECT"
+export const PLAYERS_TABLE_MODE_TEAMS = "TEAMS"
+const playersView = (state = {showEditDialog: false,
+                              mode: PLAYERS_TABLE_MODE_CREATE,
+                              selectedPlayers: []}, action) => {
   switch (action.type) {
     case SHOW_EDIT_PLAYER_DIALOG:
       return {
         ...state,
-        show: action.show
+        showEditDialog: action.showEditDialog
       }
     case SHOW_PLAY_TOURNAMENT:
       return {
         ...state,
-        activeView: "Preparation"
+        mode: PLAYERS_TABLE_MODE_SELECT
+      }
+    case SELECT_PLAYER_FOR_PARTICIPATION:
+      return {
+        ...state,
+        selectedPlayers: [...state.selectedPlayers, action.playerId]
       }
     default:
       return state
