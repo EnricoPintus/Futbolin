@@ -5,10 +5,10 @@ import {fetchTournaments, showPlayTournament } from '../actions/TournamentsActio
 import './App.css';
 
 const mapStateToProps = (state) => ({
-  tournaments: state.activeView === "Live" ?  state.tournaments.filter (function(tournament) {
+  tournaments: state.uiItems.activeView === "Live" ?  state.tournaments.filter (function(tournament) {
     return tournament.status != 1
   }) : state.tournaments,
-  mode: state.activeView === "Live" ? "Show" : "Manage"
+  mode: state.uiItems.activeView === "Live" ? "Show" : "Manage"
 })
 
 const mapDispatchToProps = dispatch => ({

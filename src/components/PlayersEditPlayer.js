@@ -26,7 +26,7 @@ class PlayersEditPlayer extends React.Component {
 
     render() {
       return (
-        <Modal show={this.props.show} >
+        <Modal show={this.props.showEditPlayerDialog} >
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
@@ -59,7 +59,7 @@ class PlayersEditPlayer extends React.Component {
 }
 
 PlayersEditPlayer.propTypes = {
-  show: PropTypes.bool.isRequired,
+  showEditPlayerDialog: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   insertPlayer: PropTypes.func.isRequired,
   mode: PropTypes.string
