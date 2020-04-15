@@ -25,6 +25,13 @@ class PlayersTable extends React.Component {
     }
 
     render() {
+      let team = 0
+      let teamsNumber = this.props.players.length / 2
+      var teamsDropdownItems = []
+      for (team = 1; team <= teamsNumber; team++)
+      {
+        teamsDropdownItems.push(<Dropdown.Item href="#/action-2">Team {team} </Dropdown.Item>)
+      }
       const showAddPlayersButton = this.props.playersView.mode === PLAYERS_TABLE_MODE_CREATE
       const teamsDropdown =
         <Dropdown>
@@ -33,8 +40,7 @@ class PlayersTable extends React.Component {
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item href="#/action-1">Random</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+             {teamsDropdownItems}
           </Dropdown.Menu>
         </Dropdown>
 
