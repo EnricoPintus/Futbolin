@@ -8,6 +8,8 @@ import PropTypes from 'prop-types'
 
 
 import './App.css';
+import { confirmPlayersSelection } from '../actions/PlayersActions';
+import { LIVE_VIEW_MODE_SELECT_PLAYERS, LIVE_VIEW_MODE_CREATE_TEAMS } from '../reducers';
 
 class PreparationComponent extends React.Component {
 
@@ -24,7 +26,12 @@ class PreparationComponent extends React.Component {
           <Col> <CreateTeams/>  </Col>
         </Row>
         <Row>
-          <Button onClick={() => this.props.generateTeams(tournament.id)}> Generate teams and matches </Button>
+          {this.props.mode === LIVE_VIEW_MODE_SELECT_PLAYERS &&
+            <Button onClick={() => this.props.confirmPlayersSelection()}> Confirm Players Selection </Button>
+          }
+          {this.props.mode === LIVE_VIEW_MODE_CREATE_TEAMS &&
+            <Button onClick={() => this.props.generateTeams(tournament.id)}> Generate teams and matches </Button>
+          }
         </Row>
       </Container>
     );
@@ -34,7 +41,9 @@ class PreparationComponent extends React.Component {
 
 PreparationComponent.propTypes = {
   tournament: PropTypes.object.isRequired,
-  generateTeams: PropTypes.func.isRequired
+  mode: PropTypes.string.isRequired,
+  generateTeams: PropTypes.func.isRequired,
+  confirmPlayersSelection: PropTypes.func.isRequired
 }
 
 export default PreparationComponent;

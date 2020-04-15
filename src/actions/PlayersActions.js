@@ -59,3 +59,11 @@ export function selectPlayerForParticipation(playerId, select) {
     select
   }
 }
+
+export const CONFIRM_PLAYERS_SELECTION = 'CONFIRM_PLAYERS_SELECTION'
+export function confirmPlayersSelection()
+{
+  return {
+    type: CONFIRM_PLAYERS_SELECTION
+  }
+}

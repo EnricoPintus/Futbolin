@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { RECEIVE_PLAYERS, SHOW_EDIT_PLAYER_DIALOG, SELECT_PLAYER_FOR_PARTICIPATION } from '../actions/PlayersActions'
+import { RECEIVE_PLAYERS, SHOW_EDIT_PLAYER_DIALOG, SELECT_PLAYER_FOR_PARTICIPATION, CONFIRM_PLAYERS_SELECTION } from '../actions/PlayersActions'
 import { SHOW_PLAY_TOURNAMENT } from '../actions/TournamentsActions'
 
 
@@ -34,8 +34,7 @@ export const PLAYERS_TABLE_MODE_CREATE = "CREATE"
 export const PLAYERS_TABLE_MODE_SELECT = "SELECT"
 export const PLAYERS_TABLE_MODE_TEAMS = "TEAMS"
 const playersView = (state = {showEditDialog: false,
-                              mode: PLAYERS_TABLE_MODE_CREATE,
-                              selectedPlayers: []}, action) => {
+                              mode: PLAYERS_TABLE_MODE_CREATE}, action) => {
   switch (action.type) {
     case SHOW_EDIT_PLAYER_DIALOG:
       return {
@@ -47,21 +46,42 @@ const playersView = (state = {showEditDialog: false,
         ...state,
         mode: PLAYERS_TABLE_MODE_SELECT
       }
-    case SELECT_PLAYER_FOR_PARTICIPATION:
+    case CONFIRM_PLAYERS_SELECTION:
       return {
         ...state,
-        selectedPlayers: [...state.selectedPlayers, action.playerId]
+        mode: PLAYERS_TABLE_MODE_TEAMS
       }
     default:
       return state
   }
 }
-
-const liveView = (state = {tournament: "empty"}, action) => {
+export const LIVE_VIEW_MODE_SELECT_PLAYERS = "SELECT_PLAYERS"
+export const LIVE_VIEW_MODE_CREATE_TEAMS = "CREATE_TEAMS"
+const liveView = (state = {tournament: "empty",
+                          preparationPhase: {
+                            selectedPlayers: []
+                          },
+                          mode: LIVE_VIEW_MODE_SELECT_PLAYERS
+                          }, action) => {
   switch (action.type) {
     case SHOW_PLAY_TOURNAMENT:
       return {
+        ...state,
         tournament: action.tournament
+      }
+    case SELECT_PLAYER_FOR_PARTICIPATION:
+      return {
+        ...state,
+        mode: LIVE_VIEW_MODE_SELECT_PLAYERS,
+        preparationPhase: {
+          ...state.preparationPhase,
+          selectedPlayers: [...state.preparationPhase.selectedPlayers, action.playerId]
+        }
+      }
+    case CONFIRM_PLAYERS_SELECTION:
+      return {
+        ...state,
+        mode: LIVE_VIEW_MODE_CREATE_TEAMS
       }
     default:
       return state
