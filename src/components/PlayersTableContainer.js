@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { fetchPlayers, showEditPlayerDialog, selectPlayerForParticipation } from '../actions/PlayersActions'
+import {PLAYERS_TABLE_MODE_TEAMS} from '../reducers/index'
 import PlayersTable from './PlayersTable'
 
 import './App.css';
@@ -7,7 +8,7 @@ import './App.css';
 
 
 const mapStateToProps = (state) => ({
-  players: state.players,
+  players: getPlayers(state.players, state.uiItems.playersView.mode, state.uiItems.liveView.preparationPhase.selectedPlayers),
   playersView: state.uiItems.playersView
 })
 
@@ -21,3 +22,13 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(PlayersTable)
+
+function getPlayers(playersData, mode, selectedPlayers)
+{
+  if (mode != PLAYERS_TABLE_MODE_TEAMS)
+    return playersData
+  else
+    return playersData.filter(function(playerData) {
+      return selectedPlayers.includes(playerData.id)
+    })
+}
