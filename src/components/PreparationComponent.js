@@ -30,7 +30,10 @@ class PreparationComponent extends React.Component {
             <Button onClick={() => this.props.confirmPlayersSelection()}> Confirm Players Selection </Button>
           }
           {this.props.mode === LIVE_VIEW_MODE_CREATE_TEAMS &&
-            <Button onClick={() => this.props.generateTeams(tournament.id)}> Generate teams and matches </Button>
+            <Button onClick={() =>
+              this.props.generateTeams(tournament.id, this.props.selectedPlayers,this.props.teamForPlayers)}>
+                Generate teams and matches
+            </Button>
           }
         </Row>
       </Container>
@@ -41,6 +44,8 @@ class PreparationComponent extends React.Component {
 
 PreparationComponent.propTypes = {
   tournament: PropTypes.object.isRequired,
+  selectedPlayers: PropTypes.array.isRequired,
+  teamForPlayers: PropTypes.object.isRequired,
   mode: PropTypes.string.isRequired,
   generateTeams: PropTypes.func.isRequired,
   confirmPlayersSelection: PropTypes.func.isRequired

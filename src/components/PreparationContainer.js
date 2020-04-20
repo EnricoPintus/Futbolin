@@ -7,11 +7,15 @@ import { confirmPlayersSelection } from '../actions/PlayersActions';
 
 const mapStateToProps = (state) => ({
   tournament: state.uiItems.liveView.tournament,
+  selectedPlayers: state.uiItems.liveView.preparationPhase.selectedPlayers,
+  teamForPlayers: state.uiItems.liveView.preparationPhase.teamForPlayers,
   mode: state.uiItems.liveView.mode
 })
 
 const mapDispatchToProps = dispatch => ({
-  generateTeams: tournamentId => dispatch(generateTeams(tournamentId)),
+  generateTeams: (tournamentId, selectedPlayers, teamForPlayers) =>
+                  dispatch(generateTeams(tournamentId, selectedPlayers, teamForPlayers)),
+
   confirmPlayersSelection: () => dispatch(confirmPlayersSelection())
 })
 

@@ -18,6 +18,12 @@ class PlayersTable extends React.Component {
         this.handleTeamSelected = this.handleTeamSelected.bind(this);
     }
 
+    getActiveTeamForPlayer(playerId, teamsForPlayers) {
+      return Object.keys(teamsForPlayers).filter(function(team) {
+        return teamsForPlayers[team].includes(playerId)
+      })
+    }
+
     handleCheckbox(playerId, event) {
       this.props.selectPlayerForParticipation(playerId, event.target.checked)
     }
@@ -44,7 +50,7 @@ class PlayersTable extends React.Component {
             <td><PlayerTeamSelector
                 playerId={player.id}
                 teamsNumber={this.props.players.length / 2}
-                activeTeam={this.props.teamsForPlayers[player.id]}
+                activeTeam={this.getActiveTeamForPlayer(player.id, this.props.teamsForPlayers)}
                 selectTeamForPlayer={this.handleTeamSelected}/> </td>
           }
         </tr>

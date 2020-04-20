@@ -37,7 +37,7 @@ class PlayerTeamSelector extends React.Component {
             <Dropdown.Item key={team} onClick={this.handleSelect}>Team {team}</Dropdown.Item>
           )
       }
-      const dropdownTitleString = (typeof this.props.activeTeam === "undefined") ? 'Select team' : this.props.activeTeam
+      const dropdownTitleString = (!this.props.activeTeam || !this.props.activeTeam.length) ? 'Select team' : this.props.activeTeam
       const teamsDropdown =
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">

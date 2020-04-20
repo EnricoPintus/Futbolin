@@ -86,7 +86,10 @@ const liveView = (state = {tournament: "empty",
       }
     case SELECT_TEAM_FOR_PLAYER:
       var newTeamPlayer = {}
-      newTeamPlayer[action.player] = action.team
+      if (!(action.team in state.preparationPhase.teamsForPlayers))
+        newTeamPlayer[action.team] = [action.player]
+      else
+        newTeamPlayer[action.team] = [...state.preparationPhase.teamsForPlayers[action.team], action.player]
       return {
         ...state,
         preparationPhase: {

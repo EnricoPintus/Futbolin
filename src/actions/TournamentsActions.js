@@ -45,10 +45,19 @@ function receiveTeamsGenerated(json) {
   }
 }
 
-export function generateTeams(tournament) {
+export function generateTeams(tournament, selectedPlayers, teamForPlayers) {
   return dispatch => {
-    return fetch('tournaments/' + tournament + "/generateTeams")
-    .then(response => response.json())
-    .then(json => dispatch(receiveTeamsGenerated(json)))
+    return fetch('tournaments/'+ tournament + '/generateTeams', {
+        method: 'PUT',
+        body: JSON.stringify({
+          selectedPlayers: selectedPlayers,
+          teamForPlayers: teamForPlayers
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+			  }
+		  })
+      .then(response => response.json())
+      .then(dispatch(fetchTournaments()))
   }
 }
