@@ -8,16 +8,22 @@ import PropTypes from 'prop-types'
 
 
 import './App.css';
+import PlayerTeamSelector from './PlayerTeamSelector';
 
 class PlayersTable extends React.Component {
 
     constructor(props) {
         super(props);
         this.handleCheckbox = this.handleCheckbox.bind(this);
+        this.handleTeamSelected = this.handleTeamSelected.bind(this);
     }
 
     handleCheckbox(playerId, event) {
       this.props.selectPlayerForParticipation(playerId, event.target.checked)
+    }
+
+    handleTeamSelected(team, playerId) {
+      this.props.selectTeamForPlayer(team, playerId)
     }
 
     componentDidMount() {
@@ -25,25 +31,7 @@ class PlayersTable extends React.Component {
     }
 
     render() {
-      let team = 0
-      let teamsNumber = this.props.players.length / 2
-      var teamsDropdownItems = []
-      for (team = 1; team <= teamsNumber; team++)
-      {
-        teamsDropdownItems.push(<Dropdown.Item href="#/action-2">Team {team} </Dropdown.Item>)
-      }
       const showAddPlayersButton = this.props.playersView.mode === PLAYERS_TABLE_MODE_CREATE
-      const teamsDropdown =
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Dropdown Button
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Random</Dropdown.Item>
-             {teamsDropdownItems}
-          </Dropdown.Menu>
-        </Dropdown>
-
 
       let playersRows = this.props.players.map((player) =>
         <tr>
@@ -52,7 +40,13 @@ class PlayersTable extends React.Component {
           </td>}
           <td>{player.name}</td>
           <td>{player.surname}</td>
-          {this.props.playersView.mode === PLAYERS_TABLE_MODE_TEAMS && <td>{teamsDropdown}</td>}
+          {this.props.playersView.mode === PLAYERS_TABLE_MODE_TEAMS &&
+            <td><PlayerTeamSelector
+                playerId={player.id}
+                teamsNumber={this.props.players.length / 2}
+                activeTeam={this.props.teamsForPlayers[player.id]}
+                selectTeamForPlayer={this.handleTeamSelected}/> </td>
+          }
         </tr>
       )
       return (
@@ -81,8 +75,10 @@ PlayersTable.propTypes = {
   requestPlayers: PropTypes.func.isRequired,
   createPlayer: PropTypes.func.isRequired,
   selectPlayerForParticipation: PropTypes.func.isRequired,
+  selectTeamForPlayer: PropTypes. func.isRequired,
   players: PropTypes.array.isRequired,
-  playersView: PropTypes.object.isRequired
+  playersView: PropTypes.object.isRequired,
+  teamsForPlayers: PropTypes.object.isRequired
 }
 
 export default PlayersTable;

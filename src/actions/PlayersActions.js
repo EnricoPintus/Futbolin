@@ -67,3 +67,13 @@ export function confirmPlayersSelection()
     type: CONFIRM_PLAYERS_SELECTION
   }
 }
+
+export const SELECT_TEAM_FOR_PLAYER = 'SELECT_TEAM_FOR_PLAYER'
+export function selectTeamForPlayer(team, player)
+{
+  return {
+    type: SELECT_TEAM_FOR_PLAYER,
+    team,
+    player
+  }
+}

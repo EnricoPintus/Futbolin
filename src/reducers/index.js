@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { RECEIVE_PLAYERS, SHOW_EDIT_PLAYER_DIALOG, SELECT_PLAYER_FOR_PARTICIPATION, CONFIRM_PLAYERS_SELECTION } from '../actions/PlayersActions'
+import { RECEIVE_PLAYERS, SHOW_EDIT_PLAYER_DIALOG, SELECT_PLAYER_FOR_PARTICIPATION, CONFIRM_PLAYERS_SELECTION, SELECT_TEAM_FOR_PLAYER } from '../actions/PlayersActions'
 import { SHOW_PLAY_TOURNAMENT } from '../actions/TournamentsActions'
 
 
@@ -59,7 +59,8 @@ export const LIVE_VIEW_MODE_SELECT_PLAYERS = "SELECT_PLAYERS"
 export const LIVE_VIEW_MODE_CREATE_TEAMS = "CREATE_TEAMS"
 const liveView = (state = {tournament: "empty",
                           preparationPhase: {
-                            selectedPlayers: []
+                            selectedPlayers: [],
+                            teamsForPlayers: {}
                           },
                           mode: LIVE_VIEW_MODE_SELECT_PLAYERS
                           }, action) => {
@@ -82,6 +83,18 @@ const liveView = (state = {tournament: "empty",
       return {
         ...state,
         mode: LIVE_VIEW_MODE_CREATE_TEAMS
+      }
+    case SELECT_TEAM_FOR_PLAYER:
+      var newTeamPlayer = {}
+      newTeamPlayer[action.player] = action.team
+      return {
+        ...state,
+        preparationPhase: {
+          ...state.preparationPhase,
+          teamsForPlayers: Object.assign({},
+            state.preparationPhase.teamsForPlayers,
+            newTeamPlayer)
+        }
       }
     default:
       return state
